@@ -13,6 +13,11 @@ return new class extends Migration
     {
         Schema::create('pricing_sp', function (Blueprint $table) {
             $table->id();
+            $table->string('nama_pricingsp',100);
+            // $table->string('harga_pricingsp',100);
+            $table->bigInteger('harga_pricingsp');
+            $table->string('deskripsi_pricingsp',1000);
+            
             $table->timestamps();
         });
     }

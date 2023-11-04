@@ -9,7 +9,7 @@
                             <div class="card-header" style="margin-top: 15px;">
                                 <div class="zoomable-image-container">
                                     @if ($post->image)
-                                        <img src="{{ asset('storage/' . $post->image) }}" alt="{{ $post->title }}"
+                                        <img src="{{ asset('storage/' . $post->image) }}" alt="{{ $post->judul }}"
                                             class="zoomable-image" style="max-width: 100%;">
                                     @else
                                         <p>No Image</p>
@@ -38,8 +38,8 @@
                                     <p>29 September 2023</p>
                                     <p><i>Create by {{ $post->author_name }}</i></p>
                                 </div>
-                                <h4>{{ $post->title }}</h4>
-                                <p>Category: {{ $post->category }}</p>
+                                <h4>{{ $post->judul }}</h4>
+                                <p>Category: {{ $post->isi }}</p>
                                 <p>{{ $post->content }}</p>
                                 <hr>
                                 <p style="text-align: right;"><a href="" class="btn btn-primary">Read More</a></p>

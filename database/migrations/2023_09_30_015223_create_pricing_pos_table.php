@@ -13,6 +13,11 @@ return new class extends Migration
     {
         Schema::create('pricing_pos', function (Blueprint $table) {
             $table->id();
+            $table->string('nama_pricingpos',100);
+            // $table->decimal('harga_pricingpos', 5, 2)->nullable()->default(123.45);
+            $table->bigInteger('harga_pricingpos');
+            $table->string('deskripsi_pricingpos',1000);
+            
             $table->timestamps();
         });
     }
