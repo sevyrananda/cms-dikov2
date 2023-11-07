@@ -13,7 +13,7 @@
                         <div class="card-body">
                             <div class="mb-3">
                                 <a href="#" class="btn btn-primary" data-toggle="modal" data-target="#createModal">Tambah Data</a>
-                                <a href="#" class="btn btn-primary ml-2">Lihat</a>
+                                <a href="{{ route('spplugin.previewalldata') }}" class="btn btn-success"><i class="fas fa-eye"></i> Preview in Website</a>
                             </div>
                             <div class="table-responsive">
                                 <table class="table table-striped">

@@ -13,7 +13,7 @@
                         <div class="card-body">
                             <div class="mb-3">
                                 <a href="#" class="btn btn-primary" data-toggle="modal" data-target="#createModal">Tambah Data</a>
-                                
+                                <a href="{{ route('posplugin.previewalldata') }}" class="btn btn-success"><i class="fas fa-eye"></i> Preview in Website</a>
                             </div>
                             <div class="table-responsive">
                                 <table class="table table-striped">
@@ -45,7 +45,7 @@
                                                     </td> --}}
                                                     <td>
                                                         <div class="d-flex justify-content">
-                                                            <a href="{{ route('previewPos', ['id' => $post->id]) }}" class="btn btn-success"><i class="fas fa-eye"></i> Preview in Website</a>
+                                                            
                                                             <a href="{{ route('previewPos', ['id' => $post->id]) }}" class="btn btn-primary">Preview</a>
                                                             <button type="submit" class="btn btn-warning"
                                                                 style="margin-left: 10px;" data-toggle="modal"

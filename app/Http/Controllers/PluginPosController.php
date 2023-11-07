@@ -57,6 +57,12 @@ class PluginPosController extends Controller
         return view('pages.diko_pos.plug.list', compact('posts'));
     }
 
+    public function previewalldata()
+    {
+        $posts = PluginPos::all();
+        return view('pages.diko_pos.plug.previewalldata', compact('posts'));
+    }
+
     public function preview($id)
     {
         $posts = PluginPos::all();

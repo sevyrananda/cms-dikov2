@@ -58,6 +58,11 @@ class PluginSpController extends Controller
     return view('pages.diko_sp.plug.list', compact('posts'));
 }
 
+public function previewalldata()
+{
+    $posts = PluginSp::all();
+    return view('pages.diko_sp.plug.previewalldata', compact('posts'));
+}
 
 public function preview($id)
 {

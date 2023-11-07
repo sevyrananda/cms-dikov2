@@ -37,6 +37,10 @@ Route::post('/login', [AuthController::class, 'loginPost'])->name('login');
 Route::delete('/logout', [AuthController::class, 'logout'])->name('logout');
 Route::get('/landing/preview/', [FiturLandingController::class, 'preview'])->name('landing.preview');
 
+Route::get('/pos/plugin/all', [PluginPosController::class, 'previewalldata'])->name('posplugin.previewalldata');
+Route::get('/sp/plugin/all', [PluginSpController::class, 'previewalldata'])->name('spplugin.previewalldata');
+
+
 Route::middleware(['auth'])->group(function () {
     // Rute yang memerlukan otentikasi
     
