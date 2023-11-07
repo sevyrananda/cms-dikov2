@@ -36,7 +36,7 @@
                                                     <td>{{ $no++ }}</td>
                                                     <td>{{ $post->name }}</td>
                                                     <td>{{ $post->email }}</td>
-                                                    <td><input type="password" value="{{ $post->password }}" ></td>
+                                                    <td><input type="password" value="{{ $post->password }}" style="border: 1px solid #dee2e6;"></td>
                                                     <td>
                                                         <div class="d-flex justify-content">
                                                             
