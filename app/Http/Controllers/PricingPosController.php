@@ -15,22 +15,25 @@ class PricingPosController extends Controller
 
     public function store(Request $request)
     {
-        // Validasi data
         $validatedData = $request->validate([
             'nama_pricingpos' => 'required',
             'harga_pricingpos' => 'required',
-            'deskripsi_pricingpos' => 'required',
+            'deskripsi_pricingpos' => 'required|array',
         ]);
-
-        $post = new PricingPos();
-        $post->nama_pricingpos = $request->input('nama_pricingpos');
-        $post->harga_pricingpos = $request->input('harga_pricingpos');
-        $post->deskripsi_pricingpos = $request->input('deskripsi_pricingpos');
-
-        $post->save();
-
+        
+        $post = PricingPos::create([
+            'nama_pricingpos' => $request->input('nama_pricingpos'),
+            'harga_pricingpos' => $request->input('harga_pricingpos'),
+        ]);
+        
+        foreach ($request->deskripsi_pricingpos as $deskripsi) {
+            $post->deskripsi()->create([
+                'deskripsi' => $deskripsi,
+            ]);
+        }
+        
         return redirect('/pos/pricing/list')->with('success', 'Pricing POS has been added.');
-    }
+    }    
 
     public function show($id)
     {
@@ -62,20 +65,28 @@ class PricingPosController extends Controller
         $validatedData = $request->validate([
             'edit_nama_pricingpos' => 'required',
             'edit_harga_pricingpos' => 'required',
-            'edit_deskripsi_pricingpos' => 'required',
+            'edit_deskripsi_pricingpos' => 'required|array',
         ]);
-
+    
         // Temukan data post berdasarkan ID
         $post = PricingPos::find($id);
-
+    
         // Perbarui data post berdasarkan data yang dikirimkan
         $post->nama_pricingpos = $request->input('edit_nama_pricingpos');
         $post->harga_pricingpos = $request->input('edit_harga_pricingpos');
-        $post->deskripsi_pricingpos = $request->input('edit_deskripsi_pricingpos');
         
-
+        // Hapus deskripsi lama
+        $post->deskripsi()->delete();
+        
+        // Tambahkan deskripsi baru
+        foreach ($request->edit_deskripsi_pricingpos as $deskripsi) {
+            $post->deskripsi()->create([
+                'deskripsi' => $deskripsi,
+            ]);
+        }
+    
         $post->save();
-
+    
         return redirect('/pos/pricing/list')->with('success', 'Pricing POS has been edited.');
     }
 

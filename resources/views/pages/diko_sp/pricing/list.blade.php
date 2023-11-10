@@ -4,32 +4,6 @@
 <div class="main-content">
     <section class="section">
         <div class="section-body">
-            <div class="row">
-                <div class="col-12">
-                    <div class="card mb-0">
-                        <div class="card-body">
-                            <ul class="nav nav-pills">
-                                <li class="nav-item">
-                                    <a class="nav-link active" href="#">All <span
-                                            class="badge badge-white">10</span></a>
-                                </li>
-                                <li class="nav-item">
-                                    <a class="nav-link" href="#">Draft <span
-                                            class="badge badge-primary">2</span></a>
-                                </li>
-                                <li class="nav-item">
-                                    <a class="nav-link" href="#">Pending <span
-                                            class="badge badge-primary">3</span></a>
-                                </li>
-                                <li class="nav-item">
-                                    <a class="nav-link" href="#">Trash <span
-                                            class="badge badge-primary">0</span></a>
-                                </li>
-                            </ul>
-                        </div>
-                    </div>
-                </div>
-            </div>
             <div class="row mt-4">
                 <div class="col-12">
                     @if (session('success'))
@@ -87,9 +61,12 @@
                                                 <td>{{ $post->nama_pricingsp }}</td>
                                                 <td>{{ $post->harga_pricingsp }}</td>
                                                 <td>
-                                                    <div>{!! $post->deskripsi_pricingsp !!}</div>
+                                                    <ul>
+                                                        @foreach($post->deskripsi as $deskripsi)
+                                                            <li>{{ $deskripsi->deskripsi }}</li>
+                                                        @endforeach
+                                                    </ul>
                                                 </td>
-                                                {{-- <td>{{ strlen($post->deskripsi_pricingsp) > 70 ? substr($post->deskripsi_pricingsp, 0, 70) . '...' : $post->deskripsi_pricingsp }}</td> --}}
                                                 <td>
                                                     <div class="d-flex justify-content">
                                                         <a href="{{ route('sppricing.preview', ['id' => $post->id]) }}" class="btn btn-primary">Preview</a>

@@ -1,8 +1,7 @@
-{{-- <script src="https://cdn.ckeditor.com/ckeditor5/40.0.0/classic/ckeditor.js"></script> --}}
-<script src="https://cdn.ckeditor.com/4.16.0/standard/ckeditor.js"></script>
+{{-- Ubah skrip CKEditor menjadi async untuk menghindari konflik --}}
+<script src="https://cdn.ckeditor.com/4.16.0/standard/ckeditor.js" async></script>
 <link rel="stylesheet" href="https://cdn.ckeditor.com/4.16.0/standard/ckeditor.css">
 
-<!-- Edit Post Modal -->
 @foreach ($posts as $post)
 <div class="modal fade" id="editModal{{ $post->id }}" tabindex="-1" role="dialog" aria-labelledby="editModalLabel" aria-hidden="true">
     <div class="modal-dialog" role="document">
@@ -25,9 +24,20 @@
                         <label for="edit_harga_pricingsp">Harga Pricing SP</label>
                         <input type="text" class="form-control" id="edit_harga_pricingsp" name="edit_harga_pricingsp" value="{{ $post->harga_pricingsp }}">
                     </div>
+                    
                     <div class="form-group">
-                        <label for="edit_deskripsi_pricingsp_{{ $post->id }}">Deskripsi Pricing POS</label>
-                        <textarea class="form-control" id="edit_deskripsi_pricingsp_{{ $post->id }}" name="edit_deskripsi_pricingsp">{{ $post->deskripsi_pricingsp }}</textarea>
+                        <label for="deskripsi_pricingsp">Deskripsi Pricing SP</label>
+                        <div id="dynamicInput_{{ $post->id }}">
+                            @foreach($post->deskripsi as $deskripsi)
+                            <div class="input-group">
+                                <input class="form-control" name="edit_deskripsi_pricingsp[]" value="{{ $deskripsi->deskripsi }}" required></input>
+                                <button type="button" class="btn btn-danger" onclick="removeEditInput(this)">Remove</button>
+                            </div>
+                            @endforeach
+                        </div>
+                        <div class="form-group">
+                            <button type="button" class="btn btn-primary" onclick="addEditInput({{ $post->id }})">Add More</button>
+                        </div>
                     </div>
                 </div>
                 <div class="modal-footer">
@@ -44,4 +54,16 @@
     @foreach ($posts as $post)
     CKEDITOR.replace('edit_deskripsi_pricingsp_{{ $post->id }}');
     @endforeach
-</script>>
+</script>
+
+<script>
+    function addEditInput(id) {
+        var div = document.createElement('div');
+        div.innerHTML = '<div class="input-group"><input class="form-control" name="edit_deskripsi_pricingsp[]" required></input><button type="button" class="btn btn-danger" onclick="removeEditInput(this)">Remove</button></div>';
+        document.getElementById('dynamicInput_' + id).appendChild(div);
+    }
+
+    function removeEditInput(element) {
+        element.parentElement.remove();
+    }
+</script>

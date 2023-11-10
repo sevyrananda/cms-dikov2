@@ -35,12 +35,18 @@
 
                             <div class="card-body">
                                 <div class="d-flex justify-content-between">
-                                    <p>29 September 2023</p>
-                                    <p><i>Create by {{ $post->author_name }}</i></p>
+                                    {{-- <p>{{ $post->id }}</p> --}}
+                                    {{-- <p><i>Create by {{ $post->author_name }}</i></p> --}}
                                 </div>
                                 <h4>{{ $post->nama_pricingsp }}</h4>
                                 <h6>Rp. {{ $post->harga_pricingsp }},-</h6>
-                                <p>{!! $post->deskripsi_pricingsp !!}</p>
+                                <div>
+                                    <ul>
+                                        @foreach($post->deskripsi as $deskripsi)
+                                            <li><i class="bi bi-dot"></i>{{ $deskripsi->deskripsi }}</li>
+                                        @endforeach
+                                    </ul>
+                                </div>
                                 <hr>
                                 <p style="text-align: right;"><a href="" class="btn btn-primary">Read More</a></p>
                             </div>

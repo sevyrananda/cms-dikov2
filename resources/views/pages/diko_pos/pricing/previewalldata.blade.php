@@ -103,7 +103,13 @@
                 <li class="na"><i class="bi bi-x"></i> <span>Massa ultricies mi quis hendrerit</span></li>
               </ul> --}}
 
-              <div>{!! $post->deskripsi_pricingpos !!}</div>
+              <div>
+                <ul>
+                  @foreach($post->deskripsi as $deskripsi)
+                      <li><i class="bi bi-dot"></i>{{ $deskripsi->deskripsi }}</li>
+                  @endforeach
+                </ul>
+              </div>
               
               <div class="text-center mt-auto">
                 <a href="#" class="buy-btn">Buy Now</a>

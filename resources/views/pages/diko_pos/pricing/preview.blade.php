@@ -40,7 +40,13 @@
                                 </div>
                                 <h4>{{ $post->nama_pricingpos }}</h4>
                                 <h6>Rp. {{ $post->harga_pricingpos }},-</h6>
-                                <div>{!! $post->deskripsi_pricingpos !!}</div>
+                                <div>
+                                    <ul>
+                                        @foreach($post->deskripsi as $deskripsi)
+                                            <li><i class="bi bi-dot"></i>{{ $deskripsi->deskripsi }}</li>
+                                        @endforeach
+                                    </ul>
+                                </div>
                                 <hr>
                                 <p style="text-align: right;"><a href="" class="btn btn-primary">Read More</a></p>
                             </div>
