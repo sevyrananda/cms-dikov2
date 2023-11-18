@@ -21,7 +21,7 @@
                             </div>
 
                             <div class="card-body">
-                                {{-- Display post details --}}
+                                
                                 <div class="d-flex justify-content-between">
                                     <p>Content :</p>
                                     {{-- Update to display post author --}}
