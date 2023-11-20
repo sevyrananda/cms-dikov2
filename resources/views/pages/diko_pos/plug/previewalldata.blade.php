@@ -243,13 +243,141 @@
                             </div>
                         </div>
                     </div><!-- End Service Item -->
-                </div>
-                @foreach ($posts as $post)
-                <h4>{{ $post->judul }}</h4>
-                <p>{{ $post->isi }}</p>
+
+
+
+<!-- HTML Modal Structure -->
+@foreach ($posts as $index => $post)
+<div class="modal fade" id="modal{{ $index + 1 }}" tabindex="-1" aria-labelledby="exampleModalLabel"
+    aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="modalTitle{{ $index + 1 }}"></h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <p id="modalContent{{ $index + 1 }}"></p>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+            </div>
+        </div>
+    </div>
+</div>
+@endforeach
+
+
+
+                    <!-- HTML -->
+<section id="plugin-menu" class="plugin-menu">
+    <div class="container" data-aos="fade-up">
+        <div class="section-header">
+            <h2>Our Plugin Menu</h2>
+        </div>
+
+        <div id="carouselExample" class="carousel slide text-center" data-ride="carousel">
+            <div class="carousel-inner">
+                @php $isFirstSlide = true; @endphp
+                @foreach ($posts as $index => $post)
+                    <div class="carousel-item @if($isFirstSlide) active @endif">
+                        <div class="row">
+                            <div class="col-sm">
+                                @if ($post->image)
+                                    <img src="{{ asset('storage/' . $post->image) }}" alt="{{ $post->judul }}"
+                                        class="small-logo mx-auto p-2 image-trigger"
+                                        data-modal="#modal{{ $index + 1 }}"
+                                        data-title="{{ $post->judul }}"
+                                        data-content="{{ $post->isi }}">
+                                @else
+                                    No Image
+                                @endif
+                            </div>
+                        </div>
+                    </div>
+                    @php $isFirstSlide = false; @endphp
                 @endforeach
             </div>
-                </div>
+
+            <!-- Previous and Next Buttons with Adjusted Padding -->
+            <a class="carousel-control-prev" href="#carouselExample" role="button" data-slide="prev"
+                style="color: black; left: -10%;">
+                <span class="carousel-control-prev-icon" aria-hidden="true" style="filter: invert(100%);"></span>
+            </a>
+            <a class="carousel-control-next" href="#carouselExample" role="button" data-slide="next"
+                style="color: black; right: -10%;">
+                <span class="carousel-control-next-icon" aria-hidden="true" style="filter: invert(100%);"></span>
+            </a>
+        </div>
+    </div>
+</section>
+
+<!-- Modal Popup -->
+@foreach ($posts as $index => $post)
+<div class="modal fade" id="modal{{ $index + 1 }}" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="modalTitle{{ $index + 1 }}"></h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
+            <div class="modal-body">
+                <p id="modalContent{{ $index + 1 }}"></p>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+            </div>
+        </div>
+    </div>
+</div>
+@endforeach
+
+<!-- Menggunakan versi yang umum digunakan -->
+<!-- Menggunakan versi yang umum digunakan (tanpa atribut integrity) -->
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.10.2/dist/umd/popper.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
+
+
+<!-- Script -->
+<script>
+    document.addEventListener("DOMContentLoaded", function () {
+        // Function to set the size of the logos
+        function setLogoSize(logoClass, width, height) {
+            const logos = document.querySelectorAll(logoClass);
+            logos.forEach((logo) => {
+                logo.style.width = width;
+                logo.style.height = height;
+            });
+        }
+
+        // Set the size of the logos (you can adjust the width and height values)
+        setLogoSize(".small-logo", "100px", "100px");
+
+        // Function to display the modal with the specified content
+        function showModal(modalId, title, content) {
+            var modal = new bootstrap.Modal(document.getElementById(modalId));
+
+            // Tambahkan kelas show secara manual
+            var modalElement = document.getElementById(modalId);
+            modalElement.classList.add('show');
+
+            document.getElementById('modalTitle' + modalId.slice(-1)).innerText = title;
+            document.getElementById('modalContent' + modalId.slice(-1)).innerText = content;
+
+            modal.show();
+        }
+
+        // Add click event listeners for each logo
+        @foreach ($posts as $index => $post)
+            document.querySelector(".col-sm:nth-child({{ $index + 1 }}) .small-logo").addEventListener("click", function () {
+                showModal("modal{{ $index + 1 }}", "{{ $post->judul }}", "{{ $post->isi }}");
+            });
+        @endforeach
+    });
+</script>
+
         </section><!-- End Services Section -->
     @endsection

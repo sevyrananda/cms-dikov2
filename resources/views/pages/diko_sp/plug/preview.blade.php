@@ -14,21 +14,20 @@
                                     </button>
                                     <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
                                         @foreach ($posts as $post)
-                                            <a class="dropdown-item" href="#" onclick="displayContent('{{ str_replace(array("\r", "\n"), '\n', addslashes($post->isi)) }}', '{{ $post->judul }}')">{{ $post->judul }}</a>
+                                            <a class="dropdown-item" href="#" onclick="displayContent('{{ str_replace(array("\r", "\n"), '\n', addslashes($post->isi)) }}', '{{ $post->judul }}', '{{ asset('storage/' . $post->image) }}')">{{ $post->judul }}</a>
                                         @endforeach
                                     </div>
                                 </div>
                             </div>
 
                             <div class="card-body">
-                                
                                 <div class="d-flex justify-content-between">
                                     <p>Content :</p>
                                     {{-- Update to display post author --}}
                                     <p><i>Created by {{ $post->author_name }}</i></p>
                                 </div>
-                                {{-- Display post category --}}
-                                {{-- <p>Category: {{ $post->isi }}</p> --}}
+                                {{-- Display post image --}}
+                                <img src="" alt="Post Image" id="selected-image" style="max-width: 100%; height: auto;">
                                 {{-- Display post content --}}
                                 <p id="selected-content"></p>
                                 <hr>
@@ -51,12 +50,15 @@
     </style>    
 
     <script>
-        function displayContent(content, judul) {
+        function displayContent(content, judul, imageUrl) {
             // Ganti semua newline (\n) dengan tag <br>
             content = content.replace(/\n/g, "<br>");
 
             // Update the content based on the selected post
             document.getElementById('selected-content').innerHTML = content;
+
+            // Update the image based on the selected post
+            document.getElementById('selected-image').src = imageUrl;
 
             // Update all dropdown items to have btn-secondary class
             var dropdownItems = document.querySelectorAll('.dropdown-item');

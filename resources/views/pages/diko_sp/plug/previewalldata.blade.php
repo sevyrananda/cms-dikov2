@@ -243,18 +243,45 @@
                             </div>
                         </div>
                     </div><!-- End Service Item -->
-                </div>
-                @foreach ($posts as $post)
-                <h4>{{ $post->judul }}</h4>
-                @if ($post->image)
-        <img src="{{ asset('storage/' . $post->image) }}" alt="{{ $post->judul }}" style="max-width: 100px;">
-    @else
-        No Image
-    @endif
-                <p>{{ $post->isi }}</p>
-                @endforeach
-            </div>
-                </div>
-            </div>
+                    <div>
+                        @foreach ($posts as $post)
+                            <img src="{{ asset('storage/' . $post->image) }}" alt="Image" class="post-image" data-judul="{{ $post->judul }}" data-isi="{{ $post->isi }}">
+                        @endforeach
+                    </div>
+                    
+                    <div id="dialog" style="display: none; position: fixed; top: 50%; left: 50%; transform: translate(-50%, -50%); background-color: #fff; padding: 20px; border: 1px solid #ccc; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); z-index: 9999;">
+                        <h4 id="dialog-title"></h4>
+                        <p id="dialog-content"></p>
+                    </div>
+                    
+                    
+                    <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+                    
+                    <script>
+                        $(document).ready(function () {
+                            $('.post-image').click(function () {
+                                console.log('Image clicked'); // Untuk mengecek apakah gambar diklik
+                    
+                                var judul = $(this).data('judul');
+                                var isi = $(this).data('isi');
+                    
+                                console.log('Judul:', judul); // Untuk mengecek nilai judul
+                                console.log('Isi:', isi); // Untuk mengecek nilai isi
+                    
+                                $('#dialog-title').text(judul);
+                                $('#dialog-content').text(isi);
+                    
+                                $('#dialog').show();
+                            });
+                    
+                            $(document).mouseup(function (e) {
+                                var container = $('#dialog');
+                                if (!container.is(e.target) && container.has(e.target).length === 0) {
+                                    container.hide();
+                                }
+                            });
+                        });
+                    </script>                    
+                                        
         </section><!-- End Services Section -->
     @endsection
