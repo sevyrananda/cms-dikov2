@@ -245,15 +245,15 @@
                     </div><!-- End Service Item -->
                     <div>
                         @foreach ($posts as $post)
-                            <img src="{{ asset('storage/' . $post->image) }}" alt="Image" class="post-image" data-judul="{{ $post->judul }}" data-isi="{{ $post->isi }}">
+                            <img src="{{ asset('storage/' . $post->image) }}" alt="Image" class="post-image" data-judul="{{ $post->judul }}" data-isi="{{ $post->isi }}" width="100px" height="100px">
                         @endforeach
                     </div>
+                    
                     
                     <div id="dialog" style="display: none; position: fixed; top: 50%; left: 50%; transform: translate(-50%, -50%); background-color: #fff; padding: 20px; border: 1px solid #ccc; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); z-index: 9999;">
                         <h4 id="dialog-title"></h4>
                         <p id="dialog-content"></p>
                     </div>
-                    
                     
                     <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
                     
